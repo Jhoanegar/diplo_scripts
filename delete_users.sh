@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 if [ $# -lt 1 ]
 then
     echo "ERROR: Missing input file"
@@ -20,9 +18,7 @@ users=`cat $1`
 
 for user in ${users//,/ }
 do
-    echo "Creating user $user..."
-    `adduser $user --password diplomado12`
-    echo "$user created..."
-    $(passwd -e $user)
+    echo "Deleting user $user..."
+    `userdel -r $user`
     echo "Done!"
 done
