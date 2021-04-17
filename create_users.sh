@@ -21,8 +21,12 @@ users=`cat $1`
 for user in ${users//,/ }
 do
     echo "Creating user $user..."
-    `adduser $user --password diplomado12`
-    echo "$user created..."
-    $(passwd -e $user)
+    `adduser $user`
+    echo "User $user was created successfully"
+
+    echo "diplomado12" | passwd --stdin $user
+    echo "Default password for $user was set successfully"
+
+    passwd --expire $user
     echo "Done!"
 done
